@@ -1,3 +1,32 @@
+# ScoreCard
+
+A scorecard application tailored for boxing matches. 
+
+Made with my mentor at [Bloc](http://bloc.io)
+
+TODO: Review the rest of the generated text below and see what is appropriate to include. 
+
+Scorecard
+========================
+
+This application was generated with the rails_apps_composer gem:
+https://github.com/RailsApps/rails_apps_composer
+provided by the RailsApps Project:
+http://railsapps.github.io/
+
+________________________
+
+Recipes:
+["apps4", "controllers", "core", "email", "extras", "frontend", "gems", "git", "init", "models", "prelaunch", "railsapps", "readme", "routes", "saas", "setup", "testing", "views"]
+
+Preferences:
+{:git=>true, :apps4=>"none", :dev_webserver=>"webrick", :prod_webserver=>"unicorn", :database=>"sqlite", :templates=>"erb", :unit_test=>"rspec", :integration=>"rspec-capybara", :continuous_testing=>"none", :fixtures=>"factory_girl", :frontend=>"bootstrap3", :email=>"sendgrid", :authentication=>"devise", :devise_modules=>"confirmable", :authorization=>"none", :form_builder=>"none", :starter_app=>"home_app", :rvmrc=>false, :local_env_file=>true, :jsruntime=>false}
+
+________________________
+
+License
+
+
 h1. Scorecard
 
 This application was generated with the "rails_apps_composer":https://github.com/RailsApps/rails_apps_composer gem provided by the "RailsApps Project":http://railsapps.github.io/.
