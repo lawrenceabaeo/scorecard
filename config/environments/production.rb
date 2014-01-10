@@ -72,16 +72,15 @@ Scorecard::Application.configure do
   # Send deprecation notices to registered listeners.
   config.active_support.deprecation = :notify
 
-  # NOTE: I'm commenting out the below because I didn't need these
-  # for my other app. I think heroku + heroku addons takes care of this:
-  # config.action_mailer.smtp_settings = {
-  #   address: "smtp.sendgrid.net",
-  #   port: 25,
-  #   domain: ENV["DOMAIN_NAME"],
-  #   authentication: "plain",
-  #   user_name: ENV["SENDGRID_USERNAME"],
-  #   password: ENV["SENDGRID_PASSWORD"]
-  # }
+  # NOTE: Looks like I need this after all:
+  config.action_mailer.smtp_settings = {
+    address: "smtp.sendgrid.net",
+    port: 25,
+    domain: ENV["DOMAIN_NAME"],
+    authentication: "plain",
+    user_name: ENV["SENDGRID_USERNAME"],
+    password: ENV["SENDGRID_PASSWORD"]
+  }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'lawrenceabaeo-scorecard.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
