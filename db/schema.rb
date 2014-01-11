@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140111232929) do
+ActiveRecord::Schema.define(version: 20140111234447) do
+
+  create_table "actions", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "points"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "cards", force: true do |t|
     t.integer  "match_id"

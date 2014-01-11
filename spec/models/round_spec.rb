@@ -2,7 +2,6 @@ require 'spec_helper'
 
 describe Round do
   it "has a valid factory" do # skipping this for now
-    pending
     create(:round).should be_valid
   end
   
