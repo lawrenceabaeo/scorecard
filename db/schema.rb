@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140111221604) do
+ActiveRecord::Schema.define(version: 20140111232929) do
 
   create_table "cards", force: true do |t|
     t.integer  "match_id"
@@ -49,6 +49,19 @@ ActiveRecord::Schema.define(version: 20140111221604) do
   add_index "matches", ["fighter_b_id"], name: "index_matches_on_fighter_b_id"
   add_index "matches", ["user_id"], name: "index_matches_on_user_id"
   add_index "matches", ["venue_id"], name: "index_matches_on_venue_id"
+
+  create_table "rounds", force: true do |t|
+    t.integer  "card_id"
+    t.integer  "round_number"
+    t.integer  "fighter_id"
+    t.integer  "action_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "rounds", ["action_id"], name: "index_rounds_on_action_id"
+  add_index "rounds", ["card_id"], name: "index_rounds_on_card_id"
+  add_index "rounds", ["fighter_id"], name: "index_rounds_on_fighter_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
