@@ -3,28 +3,21 @@ require 'spec_helper'
 # http://everydayrails.com/2012/03/19/testing-series-rspec-models-factory-girl.html
 
 describe Match do
-  it "has a valid factory" do
+  it "has a valid factory" do # skipping this for now
+    pending
     create(:match).should be_valid
   end
   
-  xit "belongs to one venue" do 
-    # Design: Need to setup a default 'blank' venue as an entry so user doesn't have to create a venue
-    # Will likely require a seed file
-  end
+  it { should belong_to(:venue) }
   
-  xit "must have athlete A" do 
-  end
+  it { should validate_presence_of(:fighter_a) }
 
-  xit "must have athlete B" do 
-  end
+  it { should validate_presence_of(:fighter_b) }
 
-  xit "has many scorecards" do
-  end
+  it { should have_many(:scorecards) }
 
-  xit "belongs to one auther (some user)" do 
-  end
+  it { should belong_to(:user)}
 
-  xit "requires total_rounds" do 
-  end
+  it { should validate_presence_of(:total_rounds)}
 
 end

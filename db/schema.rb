@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140110165444) do
+ActiveRecord::Schema.define(version: 20140111003428) do
 
   create_table "matches", force: true do |t|
     t.integer  "fighter_a_id"
@@ -21,10 +21,12 @@ ActiveRecord::Schema.define(version: 20140110165444) do
     t.integer  "total_rounds"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "matches", ["fighter_a_id"], name: "index_matches_on_fighter_a_id"
   add_index "matches", ["fighter_b_id"], name: "index_matches_on_fighter_b_id"
+  add_index "matches", ["user_id"], name: "index_matches_on_user_id"
   add_index "matches", ["venue_id"], name: "index_matches_on_venue_id"
 
   create_table "users", force: true do |t|
