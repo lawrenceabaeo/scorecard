@@ -14,7 +14,7 @@ describe Match do
 
   it { should validate_presence_of(:fighter_b) }
 
-  it { should have_many(:scorecards) }
+  it { should have_many(:cards) }
 
   it { should belong_to(:user)}
 
