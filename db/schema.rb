@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140111003428) do
+ActiveRecord::Schema.define(version: 20140111014522) do
 
   create_table "matches", force: true do |t|
     t.integer  "fighter_a_id"
@@ -51,5 +51,18 @@ ActiveRecord::Schema.define(version: 20140111003428) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "venues", force: true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "street_address"
+    t.string   "extended_address"
+    t.string   "locality"
+    t.string   "region"
+    t.string   "postal_code"
+    t.string   "country"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
