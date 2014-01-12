@@ -1,11 +1,11 @@
 class Match < ActiveRecord::Base
-  belongs_to :fighter_a
   belongs_to :venue
   belongs_to :user
   has_many :cards
 
-  validates :fighter_a, presence: true
+  belongs_to :redcorner, class_name: "Fighter", foreign_key: "redcorner_id"
+  belongs_to :bluecorner, class_name: "Fighter", foreign_key: "bluecorner_id"
+
   validates :total_rounds, presence: true
-  # validates :fighter_b, presence: true
 
 end

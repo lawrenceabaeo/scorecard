@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140111234447) do
+ActiveRecord::Schema.define(version: 20140112041925) do
 
   create_table "actions", force: true do |t|
     t.string   "name"
@@ -43,18 +43,16 @@ ActiveRecord::Schema.define(version: 20140111234447) do
   add_index "fighters", ["user_id"], name: "index_fighters_on_user_id"
 
   create_table "matches", force: true do |t|
-    t.integer  "fighter_a_id"
-    t.integer  "fighter_b_id"
     t.datetime "original_fight_date"
     t.integer  "venue_id"
     t.integer  "total_rounds"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.integer  "redcorner_id"
+    t.integer  "bluecorner_id"
   end
 
-  add_index "matches", ["fighter_a_id"], name: "index_matches_on_fighter_a_id"
-  add_index "matches", ["fighter_b_id"], name: "index_matches_on_fighter_b_id"
   add_index "matches", ["user_id"], name: "index_matches_on_user_id"
   add_index "matches", ["venue_id"], name: "index_matches_on_venue_id"
 
