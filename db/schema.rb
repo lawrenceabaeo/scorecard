@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140112041925) do
+ActiveRecord::Schema.define(version: 20140113000607) do
 
   create_table "actions", force: true do |t|
     t.string   "name"
@@ -30,6 +30,24 @@ ActiveRecord::Schema.define(version: 20140112041925) do
 
   add_index "cards", ["match_id"], name: "index_cards_on_match_id"
   add_index "cards", ["user_id"], name: "index_cards_on_user_id"
+
+  create_table "cells", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "round_id"
+  end
+
+  add_index "cells", ["round_id"], name: "index_cells_on_round_id"
+
+  create_table "events", force: true do |t|
+    t.integer  "cell_id"
+    t.integer  "action_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "events", ["action_id"], name: "index_events_on_action_id"
+  add_index "events", ["cell_id"], name: "index_events_on_cell_id"
 
   create_table "fighters", force: true do |t|
     t.string   "first_name"
@@ -59,15 +77,13 @@ ActiveRecord::Schema.define(version: 20140112041925) do
   create_table "rounds", force: true do |t|
     t.integer  "card_id"
     t.integer  "round_number"
-    t.integer  "fighter_id"
-    t.integer  "action_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "redcornercell_id"
+    t.integer  "bluecornercell_id"
   end
 
-  add_index "rounds", ["action_id"], name: "index_rounds_on_action_id"
   add_index "rounds", ["card_id"], name: "index_rounds_on_card_id"
-  add_index "rounds", ["fighter_id"], name: "index_rounds_on_fighter_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
