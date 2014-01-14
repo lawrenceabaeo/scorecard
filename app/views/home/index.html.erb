@@ -1,2 +1,35 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+<div class="container">
+  <div class="myhome">
+    <div class="home_statement">
+
+      <h1>Boxing Scorecard</h1>
+
+      <p>Can you <span class='myemphasis'>really</span> remember 12 rounds of boxing in your head?<br />Prove your winner using our boxing scorecards!</p>
+
+      <p>
+        <%= link_to "Sign In", new_user_session_path, class: 'btn btn-default btn-large' %> or 
+        <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-primary btn-large' %> now!
+      </p>
+    </div>
+  </div>
+
+  <div class="row">
+    
+    <div class="col-lg-4 col-md-4">
+      <h4>Close Fight Conundrums?!?</h4>
+      <p>When rounds went either way, who did you pick? As more rounds go by and the beer sinks in, you may not remember but our scorecard will!</p>
+    </div>
+    
+    <div class="col-lg-4 col-md-4">
+      <h4>Cloud power!</h4>
+      <p>Stop losing those clunky spreadsheet files that had your scores, and were stuck on your one machine at home. Our website stores your scores!</p>
+    </div>  
+
+    <div class="col-lg-4 col-md-4">
+      <h4>Quick, Custom Cards</h4>
+      <p>Need to score an amateur match? Maybe a quickie in the gym? No problem, setup matches that last from 1 to 12 rounds!</p>
+    </div>
+
+  </div>
+
+</div>

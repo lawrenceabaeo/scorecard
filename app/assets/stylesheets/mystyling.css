@@ -1,0 +1,23 @@
+.myemphasis {
+  font-style: italic;
+}
+
+.myhome {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.home_statement {
+  padding: 24px;
+  border-radius: 6px;
+  background-color: whitesmoke;
+  border: 1px solid #e3e3e3;
+  margin-top: ;
+  text-align: center;
+}
+
+.home_statement h1 {
+  font-size: 48px;
+}
