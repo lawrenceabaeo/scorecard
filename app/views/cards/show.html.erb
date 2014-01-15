@@ -1,2 +1,19 @@
 <h1>Cards#show</h1>
 <p>Find me in app/views/cards/show.html.erb</p>
+
+<table class='table table-bordered'>
+  <tbody>
+    <thead>
+      <th>Red Corner:<br /><%= @red_corner_name %></th>
+      <th>Round #</th>
+      <th>Blue Corner:<br /><%= @blue_corner_name%></th>   
+    </thead>
+    <% @total_rounds.times do |num| %>
+      <tr>
+        <td>click</td>
+        <td><%= num+1 %></td>
+        <td>click</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

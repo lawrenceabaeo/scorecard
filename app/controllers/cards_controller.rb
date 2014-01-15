@@ -3,6 +3,10 @@ class CardsController < ApplicationController
   end
 
   def show
+    @card = Card.find(params[:id])
+    @total_rounds = @card.match.total_rounds
+    @red_corner_name = @card.match.redcorner.first_name + " " + @card.match.redcorner.last_name
+    @blue_corner_name = @card.match.bluecorner.first_name + " " + @card.match.bluecorner.last_name
   end
 
   def new
