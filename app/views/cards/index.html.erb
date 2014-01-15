@@ -1,0 +1,9 @@
+<h1>Quick Scorecard Maker</h1>
+<%= form_tag({controller: "cards", action: "create"}, method: "post") %>
+  <%= label_tag :total_rounds %>
+  <% distance = Array.new %>
+  <% 12.times.each do |num| %>
+    <% distance << ["#{num+1}", num+1] %>
+  <% end %>
+  <%= select_tag(:total_rounds, options_for_select(distance) ) %>
+  <%= submit_tag "Create" %>
