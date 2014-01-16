@@ -5,3 +5,5 @@ require File.expand_path('../application', __FILE__)
 Scorecard::Application.initialize!
 
 YAML_CONFIG = YAML.load_file("#{Rails.root}/db/system_objects.yml")
+
+YAML_ACTIONS = YAML.load_file("#{Rails.root}/db/actions.yml")
