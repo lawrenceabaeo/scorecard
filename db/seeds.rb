@@ -12,23 +12,21 @@
 # puts 'user: ' << user.name
 # user.confirm!
 
-setup_data_file  = File.join(Rails.root, 'db', 'system_objects.yml')
-yaml_data = YAML::load_file(setup_data_file)
-
-if (User.where(:name => "System Default").where(:email => "systemdefault@example.com").exists? == false)
-  system_user = User.new(yaml_data["system_user"])
-  system_user.skip_confirmation!
-  system_user.save
+yaml_system_user = YAML_CONFIG["yaml_system_user"]
+if (User.where(:name => yaml_system_user["name"]).where(:email => yaml_system_user["email"]).exists? == false)
+  sys_user = User.new(yaml_system_user)
+  sys_user.skip_confirmation!
+  sys_user.save
 else 
-  system_user = User.find_by_email("systemdefault@example.com")
+  sys_user = User.find_by_email(yaml_system_user["email"])
 end
 
-if (Fighter.where(:first_name => "Fighter").where(:last_name => "A").where(:user_id => system_user).exists? == false)
-  fighter_a = Fighter.create(yaml_data["fighter_a"])
-  fighter_a.update_attributes(:user => system_user)
+fighter_a = YAML_CONFIG["fighter_a"]
+if (Fighter.where(:first_name => fighter_a["first_name"]).where(:last_name => fighter_a["last_name"]).where(:user_id => sys_user).exists? == false)
+  sys_user.fighters.create(fighter_a)
 end
 
-if (Fighter.where(:first_name => "Fighter").where(:last_name => "B").where(:user_id => system_user).exists? == false)
-  fighter_b = Fighter.create(yaml_data["fighter_b"])
-  fighter_b.update_attributes(:user => system_user)
+fighter_b = YAML_CONFIG["fighter_b"]
+if (Fighter.where(:first_name => fighter_b["first_name"]).where(:last_name => fighter_b["last_name"]).where(:user_id => sys_user).exists? == false)
+  sys_user.fighters.create(fighter_b)
 end

@@ -5,4 +5,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_many :matches
   has_many :cards
+  has_many :fighters # yeah, it's weird, at some point I may want to rethink a fighter 'belonging' to an end user
 end

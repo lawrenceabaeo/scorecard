@@ -1,5 +1,5 @@
 <h1>Quick Scorecard Maker</h1>
-<%= form_tag({controller: "cards", action: "create"}, method: "post") %>
+<%= form_tag({controller: "cards", action: "quick_create"}, method: "post") %>
   <%= label_tag :total_rounds %>
   <% distance = Array.new %>
   <% 12.times.each do |num| %>
