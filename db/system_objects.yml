@@ -1,0 +1,13 @@
+system_user: 
+  name: System Default
+  email: systemdefault@example.com
+  password: helloworld
+  password_confirmation: helloworld
+
+fighter_a: 
+  first_name: Fighter
+  last_name: A
+
+fighter_b: 
+  first_name: Fighter
+  last_name: B

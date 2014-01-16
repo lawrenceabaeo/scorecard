@@ -12,25 +12,18 @@
 # puts 'user: ' << user.name
 # user.confirm!
 
-admin = User.new(
-  name: 'Admin User',
-  email: 'admin@example.com',
-  password: 'helloworld',
-  password_confirmation: 'helloworld')
-admin.skip_confirmation!
-admin.save
+setup_data_file  = File.join(Rails.root, 'db', 'system_objects.yml')
+yaml_data = YAML::load_file(setup_data_file)
 
-u = User.new(
-  name: 'System Default',
-  email: 'systemdefault@example.com',
-  password: 'helloworld',
-  password_confirmation: 'helloworld')
-u.skip_confirmation!
-u.save
+system_user = User.new(yaml_data["system_user"])
+system_user.skip_confirmation!
+system_user.save
 
-fighter_a = Fighter.new(:first_name => "Fighter", :last_name => "A", :user => u)
-fighter_a.save
+fighter_a = Fighter.create(yaml_data["fighter_a"])
+fighter_a.update_attributes(:user => system_user)
 
-fighter_b = Fighter.new(:first_name => "Fighter", :last_name => "B", :user => u)
-fighter_b.save
+fighter_b = Fighter.create(yaml_data["fighter_b"])
+fighter_b.update_attributes(:user => system_user)
+
+
 

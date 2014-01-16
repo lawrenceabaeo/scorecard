@@ -41,7 +41,7 @@ class CardsController < ApplicationController
       card = current_user.cards.build(:match_id => match.id)
 
       if (card.save)
-        redirect_to card, :notice => "You successfully created a CARD! TODO: Individual Scorecard"        
+        redirect_to card, :notice => "You successfully created a scorecard!"        
       else  
         redirect_to cards_path, :alert => "There was an error saving the SCORECARD. Please try again."
       end

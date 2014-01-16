@@ -14,9 +14,10 @@ describe 'Quick Scorecard' do
 
   it 'lets user select round numbers to create card' do 
     click_on "Cards"
-    select '12', from: 'match_total_rounds'
+    select '12', from: 'total_rounds'
     click_button "Create"
     page.should have_content "You successfully created a scorecard!"
   end
+
 
 end
