@@ -15,15 +15,20 @@
 setup_data_file  = File.join(Rails.root, 'db', 'system_objects.yml')
 yaml_data = YAML::load_file(setup_data_file)
 
-system_user = User.new(yaml_data["system_user"])
-system_user.skip_confirmation!
-system_user.save
+if (User.where(:name => "System Default").where(:email => "systemdefault@example.com").exists? == false)
+  system_user = User.new(yaml_data["system_user"])
+  system_user.skip_confirmation!
+  system_user.save
+else 
+  system_user = User.find_by_email("systemdefault@example.com")
+end
 
-fighter_a = Fighter.create(yaml_data["fighter_a"])
-fighter_a.update_attributes(:user => system_user)
+if (Fighter.where(:first_name => "Fighter").where(:last_name => "A").where(:user_id => system_user).exists? == false)
+  fighter_a = Fighter.create(yaml_data["fighter_a"])
+  fighter_a.update_attributes(:user => system_user)
+end
 
-fighter_b = Fighter.create(yaml_data["fighter_b"])
-fighter_b.update_attributes(:user => system_user)
-
-
-
+if (Fighter.where(:first_name => "Fighter").where(:last_name => "B").where(:user_id => system_user).exists? == false)
+  fighter_b = Fighter.create(yaml_data["fighter_b"])
+  fighter_b.update_attributes(:user => system_user)
+end
