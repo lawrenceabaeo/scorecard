@@ -12,7 +12,7 @@
 # puts 'user: ' << user.name
 # user.confirm!
 
-yaml_system_user = YAML_CONFIG["yaml_system_user"]
+yaml_system_user = YAML_CONFIG["system_user"]
 if (User.where(:name => yaml_system_user["name"]).where(:email => yaml_system_user["email"]).exists? == false)
   sys_user = User.new(yaml_system_user)
   sys_user.skip_confirmation!
