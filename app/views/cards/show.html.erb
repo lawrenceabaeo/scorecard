@@ -8,12 +8,24 @@
       <th>Round #</th>
       <th>Blue Corner:<br /><%= @blue_corner_name%></th>   
     </thead>
-    <% @total_rounds.times do |num| %>
-      <tr>
-        <td>click</td>
-        <td><%= num+1 %></td>
-        <td>click</td>
+    <% @rounds.each do |round| %>
+        <% red_cell = round.redcornercell.id %>
+        <% blue_cell = round.bluecornercell.id %>
+      
+      <tr>  
+        <td>
+          round.id is: <%= round.id %><br />
+          redcornercell id is: <%= red_cell %><br />
+        </td>
+        
+        <td><%= round.round_number %></td>
+        
+        <td>
+          round.id is: <%= round.id %><br />
+          bluecornercell id is: <%= blue_cell %><br /> 
+        </td>
       </tr>
+    
     <% end %>
   </tbody>
 </table>

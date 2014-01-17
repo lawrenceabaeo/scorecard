@@ -8,7 +8,7 @@ class CardsController < ApplicationController
 
   def show
     @card = Card.find(params[:id])
-    @total_rounds = @card.match.total_rounds
+    @rounds = Round.where(:card => @card).order(round_number: :asc )
     @red_corner_name = @card.match.redcorner.first_name + " " + @card.match.redcorner.last_name
     @blue_corner_name = @card.match.bluecorner.first_name + " " + @card.match.bluecorner.last_name
   end
@@ -34,11 +34,11 @@ class CardsController < ApplicationController
   def create
   end
 
-  private
+  private #====================================================================================
   
   def create_quick_match
     # Match params
-    total_rounds = params[:total_rounds]
+    total_rounds = params[:total_rounds] || 1 # in case params got messed up, which they shouldn't
     system_user = User.find_by_email(YAML_CONFIG['system_user']['email'])
     fighter_a = Fighter.where(:user => system_user).where(:last_name => YAML_CONFIG['fighter_a']['last_name']).first
     fighter_b = Fighter.where(:user => system_user).where(:last_name => YAML_CONFIG['fighter_b']['last_name']).first

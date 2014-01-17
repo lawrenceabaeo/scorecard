@@ -17,6 +17,7 @@ describe 'Quick Scorecard' do
     select '12', from: 'total_rounds'
     click_button "Create"
     page.should have_content "You successfully created a scorecard!"
+    page.should have_content "12"
   end
 
 
