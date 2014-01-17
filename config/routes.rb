@@ -7,4 +7,6 @@ Scorecard::Application.routes.draw do
   end
   root :to => "home#index"
   devise_for :users
+
+  resources :cells
 end
