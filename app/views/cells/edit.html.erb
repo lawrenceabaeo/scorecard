@@ -1,0 +1,23 @@
+<h1>Cells#edit</h1>
+<p>Find me in app/views/cells/edit.html.erb</p>
+
+<table class='table table-bordered'>
+  
+  <tbody>
+    <thead>
+      <th>Name</th>
+      <th>Points</th>  
+    </thead>
+  </tbody>
+
+  <% @actions.each do |action| %>
+    <tr>
+      <td>
+        <%= action.name %>
+      </td>
+      <td>
+        <%= action.points %>
+      </td>
+    </tr>
+  <% end %>
+</table>

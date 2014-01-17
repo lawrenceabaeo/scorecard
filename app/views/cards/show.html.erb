@@ -16,13 +16,15 @@
         <td>
           round.id is: <%= round.id %><br />
           redcornercell id is: <%= red_cell %><br />
+          <%= link_to "Edit Cell", edit_cell_path(round.redcornercell) %>
         </td>
         
         <td><%= round.round_number %></td>
         
         <td>
           round.id is: <%= round.id %><br />
-          bluecornercell id is: <%= blue_cell %><br /> 
+          bluecornercell id is: <%= blue_cell %><br />
+          <%= link_to "Edit Cell", edit_cell_path(round.bluecornercell) %>
         </td>
       </tr>
     
