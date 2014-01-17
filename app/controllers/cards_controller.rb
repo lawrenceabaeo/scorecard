@@ -20,29 +20,44 @@ class CardsController < ApplicationController
   end
 
   def quick_create
-    # Match params
-    total_rounds = params[:total_rounds]
-    system_user = User.find_by_email(YAML_CONFIG['system_user']['email'])
-    fighter_a = Fighter.where(:user_id => system_user.id).where(:last_name => "A").first
-    fighter_b = Fighter.where(:user_id => system_user.id).where(:last_name => "B").first
-    
-    match = Match.new
-    match = current_user.matches.build(:total_rounds => total_rounds, :redcorner => fighter_a, :bluecorner => fighter_b)
-    if !(match.save)
-      redirect_to scorecards_path, :alert => "There was an error when saving. Please try again."
-    end
-    
-    #Now create card with that new match object
+    quick_match = create_quick_match  
     card = Card.new
-    card = current_user.cards.build(:match_id => match.id)
+    card = current_user.cards.build(:match => quick_match)
     if (card.save)
-      redirect_to card, :notice => "You successfully created a scorecard!"        
+      create_rounds_and_cells(card)
+      redirect_to card, :notice => "You successfully created a scorecard!"
     else  
       redirect_to cards_path, :alert => "There was an error saving the SCORECARD. Please try again."
     end
   end
 
   def create
+  end
+
+  private
+  
+  def create_quick_match
+    # Match params
+    total_rounds = params[:total_rounds]
+    system_user = User.find_by_email(YAML_CONFIG['system_user']['email'])
+    fighter_a = Fighter.where(:user => system_user).where(:last_name => YAML_CONFIG['fighter_a']['last_name']).first
+    fighter_b = Fighter.where(:user => system_user).where(:last_name => YAML_CONFIG['fighter_b']['last_name']).first
+    
+    match = Match.new
+    match = current_user.matches.build(:total_rounds => total_rounds, :redcorner => fighter_a, :bluecorner => fighter_b)
+    if !(match.save)
+      redirect_to scorecards_path, :alert => "There was an error when saving. Please try again."
+    end
+    return match
+  end
+
+  def create_rounds_and_cells(card)
+    card.match.total_rounds.times do |round|
+      this_round = card.rounds.create(:round_number => round + 1)
+      this_round.update_attributes(
+        redcornercell: Cell.create(round: this_round), 
+        bluecornercell: Cell.create(round: this_round) )
+    end
   end
 
 end
