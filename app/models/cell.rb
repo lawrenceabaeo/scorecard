@@ -4,4 +4,14 @@ class Cell < ActiveRecord::Base
   belongs_to :round
 
   has_many :events
+
+  protected # ==========================================================
+  def self.cell_points_total(cell)
+    total_points = 0
+    cell.events.each do |event|
+      total_points += event.action.points
+    end
+    return total_points
+  end
+
 end

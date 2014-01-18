@@ -20,5 +20,18 @@ describe 'Quick Scorecard' do
     page.should have_content "12"
   end
 
+  it 'lets user edit cell using Edit link' do 
+    # need to use factory to create a card
+    click_on "Cards"
+    select '12', from: 'total_rounds'
+    click_button "Create"
+    # crap, now need to direct test to a specific edit link
+    # then click an action
+    # then verify the result
+  end
+
+
+
+
 
 end

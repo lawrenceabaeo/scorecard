@@ -13,7 +13,9 @@
   <% @actions.each do |action| %>
     <tr>
       <td>
-        <%= action.name %>
+        <%= action.name %><br />
+        Action ID is: <%= action.id %><br />
+        <%= link_to "Apply this action to this fighter", cell_path(id: @cell_id, action_id: action.id), method: :patch %>
       </td>
       <td>
         <%= action.points %>
