@@ -4,38 +4,64 @@ action_objects:
   name: Wins Round
   description: Boxer wins the round. 
   points: 10
+  result_type: POINTS
 
 - action_code: LosesRound
   name: Loses Round
   description: Boxer loses the round.
   points: 9
+  result_type: POINTS
 
 - action_code: Tie
   name: Tie Round
   description: Both boxers win the round. 
   points: 10
+  result_type: TIE
 
 - action_code: PointDeduct
   name: Point Deduction (generic)
   description: Referee deducts a point from this boxer. 
   points: -1
+  result_type: POINTS
 
 - action_code: DQ
-  name: DQ (Disqualification)
+  name: Loses By DQ (Disqualification)
   description: Referee disqualifies this boxer
   points: 0 
+  result_type: LOSS
+
+- action_code: WinsByDQ
+  name: Wins by DQ
+  description: The other boxer was disqualified, resulting in a win for this boxer. 
+  points: 0 
+  result_type: WIN
 
 - action_code: NC
   name: NC (No Contest)
   description: Referee declares a no contest for both boxers. 
   points: 0
+  result_type: NO CONTEST
 
 - action_code: WinsByKO
   name: Wins by KO (Knocks Out other opponent)
   description: This boxer knocked out the other boxer. 
   points: 0
+  result_type: WIN
+
+- action_code: LosesByKO
+  name: Loses by KO
+  description: This boxer was knocked out by the other boxer. 
+  points: 0
+  result_type: LOSS
 
 - action_code: WinsByTKO
   name: Wins by TKO (generic Technical Knock Out)
   description: This boxer wins due to a technical knockout.
   points: 0
+  result_type: WIN
+
+- action_code: LosesByTKO
+  name: Loses by TKO (generic Technical Knock Out)
+  description: This boxer loses due to a technical knockout.
+  points: 0
+  result_type: LOSS
