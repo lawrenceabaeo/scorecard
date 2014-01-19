@@ -24,7 +24,7 @@ action_objects:
   points: -1
   result_type: POINTS
 
-- action_code: DQ
+- action_code: LosesByDQ
   name: Loses By DQ (Disqualification)
   description: Referee disqualifies this boxer
   points: 0 
