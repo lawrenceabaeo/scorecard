@@ -42,11 +42,13 @@ end
 actions_data = YAML_ACTIONS
 actions = actions_data["action_objects"]
 actions.each do |a|
-  entry = Action.where(name: a['name'])
+  entry = Action.find_by_name(a['name'])
   if entry.blank?
     puts "Creating actions entry for #{a['name']}"
     Action.create(a)
   else
-    puts "Actions entry for #{a['name']} already exists, skipping creation."
+    puts "Overwriting current Actions entry for #{a['name']}"
+    # puts "Actions entry for #{a['name']} already exists, skipping creation."
+    entry.update_attributes(a)
   end
 end
