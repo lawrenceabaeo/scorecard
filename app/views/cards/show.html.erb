@@ -6,7 +6,7 @@
     <thead>
       <th>Quick Score</th>
       <th>Red Corner:<br /><%= @red_corner_name %></th>
-      <th>Round #</th>
+      <th>Rnd #</th>
       <th>Blue Corner:<br /><%= @blue_corner_name%></th>   
       <th>Quick Score</th>
     </thead>
@@ -26,31 +26,24 @@
           <% end %>
           &nbsp;&nbsp; 
           
-          <%= link_to cell_path(id: round.redcornercell, action_id: loses_round_id), method: :patch, :title => @red_corner_name + " loses this round" do %>
+          <%= link_to cell_path(id: round.redcornercell, action_id: loses_round_id), method: :patch, :title => @red_corner_name + " +9 loses this round" do %>
           <i class="fa fa-frown-o"></i>
           <% end %>
           &nbsp;&nbsp;
           
-          <%= link_to cell_path(id: round.redcornercell, action_id: point_deduction_id), method: :patch, :title => "-1 point to " + @red_corner_name do %>
-            <i class="fa fa-minus-circle"></i>
-          <% end %>
+          <%= link_to "-1", cell_path(id: round.redcornercell, action_id: point_deduction_id), method: :patch, :title => "-1 point to " + @red_corner_name %>
           &nbsp;&nbsp;
 
-          <%= link_to cell_path(id: round.redcornercell, action_id: ko_id), method: :patch, :title => @red_corner_name + "wins by knockout" do %>
-            <i class="fa fa-bolt"></i>  
-          <% end %>
+          <%= link_to "KO", cell_path(id: round.redcornercell, action_id: ko_id), method: :patch, :title => @red_corner_name + " wins by knockout" %>
           &nbsp;&nbsp;
           
-          <%= link_to cell_path(id: round.redcornercell, action_id: tko_id), method: :patch, :title => @red_corner_name + "wins by technical knockout" do %>
-            <i class="fa fa-asterisk"></i>
-          <% end %>
-          
+          <%= link_to "TKO", cell_path(id: round.redcornercell, action_id: tko_id), method: :patch, :title => @red_corner_name + " wins by technical knockout" %>
         </td>
         <td>
           <% if (red_cell_points > 0) %>
             <%= link_to red_cell_points, edit_cell_path(round.redcornercell) %>
           <% else %>
-            <%= link_to "Judgement", edit_cell_path(round.redcornercell), :title => "More scoring options" %>  
+            <%= link_to "(new)", edit_cell_path(round.redcornercell), :title => "More scoring options" %>  
           <% end %>
         </td>
         
@@ -60,7 +53,7 @@
           <% if (blue_cell_points > 0) %>
             <%= link_to blue_cell_points, edit_cell_path(round.bluecornercell) %>
           <% else %>
-            <%= link_to "Judgement", edit_cell_path(round.bluecornercell), :title => "More scoring options" %>  
+            <%= link_to "(new)", edit_cell_path(round.bluecornercell), :title => "More scoring options" %>  
           <% end %>
         </td>
         <td>
@@ -69,7 +62,7 @@
           <% end %>
           &nbsp;&nbsp; 
           
-          <%= link_to cell_path(id: round.bluecornercell, action_id: loses_round_id), method: :patch, :title => @blue_corner_name + " loses this round" do %>
+          <%= link_to cell_path(id: round.bluecornercell, action_id: loses_round_id), method: :patch, :title => @blue_corner_name + " +9 loses this round" do %>
           <i class="fa fa-frown-o"></i>
           <% end %>
           &nbsp;&nbsp;
@@ -79,12 +72,12 @@
           <% end %>
           &nbsp;&nbsp;
 
-          <%= link_to cell_path(id: round.bluecornercell, action_id: ko_id), method: :patch, :title => @blue_corner_name + "wins by knockout" do %>
+          <%= link_to cell_path(id: round.bluecornercell, action_id: ko_id), method: :patch, :title => @blue_corner_name + " wins by knockout" do %>
             <i class="fa fa-bolt"></i>  
           <% end %>
           &nbsp;&nbsp;
           
-          <%= link_to cell_path(id: round.bluecornercell, action_id: tko_id), method: :patch, :title => @blue_corner_name + "wins by technical knockout" do %>
+          <%= link_to cell_path(id: round.bluecornercell, action_id: tko_id), method: :patch, :title => @blue_corner_name + " wins by technical knockout" do %>
             <i class="fa fa-asterisk"></i>
           <% end %>
         </td>
@@ -92,10 +85,24 @@
     <% end %>
     <tr>
       <td></td>
-      <td><%= Card.corner_results(@card, "red") %></td>
-      <td>Result</td>
-      <td><%= Card.corner_results(@card, "blue") %></td>
+      <td><%= Card.current_score(@card, "red") %></td>
+      <td>Score</td>
+      <td><%= Card.current_score(@card, "blue") %></td>
       <td></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <%= Card.final_score(@card, "red") %>
+      </td>
+      <td>Final</td>
+      <td><%= Card.final_score(@card, "blue") %></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td colspan="5">TODO: Need to implement comment on Winner here<br />
+        Not sure about final format yet. </td>
     </tr>
   </tbody>
 </table>
+

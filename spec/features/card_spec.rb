@@ -30,8 +30,40 @@ describe 'Quick Scorecard' do
     # then verify the result
   end
 
+  it 'shows a current score for both boxers, even if fight still has rounds left' do
+    pending
+  end
 
+  it 'shows a final score for a boxer after all rounds have been scored' do 
+    pending
+  end
 
+  it 'does NOT show a final score if some rounds still need scoring' do
+    pending
+  end
 
+  it 'shows a win-by-your-scorecard-points message if there is a final score' do
+    pending
+  end
+
+  it 'shows a non-points message for fight stoppage like KO' do 
+    pending
+  end
+
+  it 'in VERSION 2 hides edit options for rounds that occur after a stoppage event' do
+    pending
+  end
+
+  it 'automatically scores round for Boxer B as a loss if user scores Boxer A winning the round' do 
+    pending
+  end
+
+  it 'automatically scores round for Boxer B as a win if user scores Boxer A losing the round' do 
+    pending
+  end
+
+  it 'automatically scores both boxers with 10 if user scores one boxer with a tie' do 
+    pending
+  end
 
 end
