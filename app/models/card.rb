@@ -60,4 +60,6 @@ class Card < ActiveRecord::Base
     return false
   end
 
+  
+
 end

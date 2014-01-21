@@ -1,14 +1,29 @@
+<script type="text/javascript">
+    $(function () {
+        $("[rel='tooltip']").tooltip();
+    });
+</script>
+
 <h1>Cards#show</h1>
 <p>Find me in app/views/cards/show.html.erb</p>
 
 <table class='table table-bordered'>
+  <colgroup>
+    <col class="quick-score-column" />
+    <col />
+    <col class="rounds-column" />
+    <col />
+    <col class="quick-score-column" />
+  </colgroup>
   <tbody>
     <thead>
-      <th>Quick Score</th>
-      <th>Red Corner:<br /><%= @red_corner_name %></th>
-      <th>Rnd #</th>
-      <th>Blue Corner:<br /><%= @blue_corner_name%></th>   
-      <th>Quick Score</th>
+      <tr>
+        <th>Quick Score</th>
+        <th><%= @red_corner_name %></th>
+        <th>Rnd #</th>
+        <th><%= @blue_corner_name%></th>   
+        <th>Quick Score</th>
+      </tr>
     </thead>
     <% @rounds.each do |round| %>
       <% red_cell_points = Cell.cell_points_total(round.redcornercell) %>
@@ -18,68 +33,27 @@
       <% point_deduction_id = Action.find_by_name("Point Deduction (generic)").id %>
       <% ko_id = Action.find_by_name("Wins by KO (Knocks Out other opponent)").id %>
       <% tko_id = Action.find_by_name("Wins by TKO (generic Technical Knock Out)").id %>
+
       <tr>  
         <td>
-          
-          <%= link_to cell_path(id: round.redcornercell, action_id: wins_round_id), method: :patch, :title => "+10 " + @red_corner_name + " wins round" do %>
-          <i class="fa fa-smile-o"></i>
-          <% end %>
-          &nbsp;&nbsp; 
-          
-          <%= link_to cell_path(id: round.redcornercell, action_id: loses_round_id), method: :patch, :title => @red_corner_name + " +9 loses this round" do %>
-          <i class="fa fa-frown-o"></i>
-          <% end %>
-          &nbsp;&nbsp;
-          
-          <%= link_to "-1", cell_path(id: round.redcornercell, action_id: point_deduction_id), method: :patch, :title => "-1 point to " + @red_corner_name %>
-          &nbsp;&nbsp;
-
-          <%= link_to "KO", cell_path(id: round.redcornercell, action_id: ko_id), method: :patch, :title => @red_corner_name + " wins by knockout" %>
-          &nbsp;&nbsp;
-          
-          <%= link_to "TKO", cell_path(id: round.redcornercell, action_id: tko_id), method: :patch, :title => @red_corner_name + " wins by technical knockout" %>
+          <%= render partial: 'cards/quick_score', locals: { :boxer_name => @red_corner_name, :corner => "red", :round => round, :wins_round_id => wins_round_id, :loses_round_id => loses_round_id, :point_deduction_id => point_deduction_id, :ko_id => ko_id, :tko_id => tko_id } %>
         </td>
         <td>
-          <% if (red_cell_points > 0) %>
-            <%= link_to red_cell_points, edit_cell_path(round.redcornercell) %>
-          <% else %>
-            <%= link_to "(new)", edit_cell_path(round.redcornercell), :title => "More scoring options" %>  
+          <% if (red_cell_points != 0) %>
+            <%= link_to red_cell_points, edit_cell_path(round.redcornercell), :title => "Edit this score", :class => 'tip' %>
           <% end %>
         </td>
         
         <td><%= round.round_number %></td>
         
         <td>
-          <% if (blue_cell_points > 0) %>
-            <%= link_to blue_cell_points, edit_cell_path(round.bluecornercell) %>
-          <% else %>
-            <%= link_to "(new)", edit_cell_path(round.bluecornercell), :title => "More scoring options" %>  
+          <% if (blue_cell_points != 0) %>
+            <%= link_to blue_cell_points, edit_cell_path(round.bluecornercell), :title => "Edit this score", :class => 'tip' %>
           <% end %>
         </td>
-        <td>
-          <%= link_to cell_path(id: round.bluecornercell, action_id: wins_round_id), method: :patch, :title => "+10 " + @blue_corner_name + " wins round" do %>
-          <i class="fa fa-smile-o"></i>
-          <% end %>
-          &nbsp;&nbsp; 
-          
-          <%= link_to cell_path(id: round.bluecornercell, action_id: loses_round_id), method: :patch, :title => @blue_corner_name + " +9 loses this round" do %>
-          <i class="fa fa-frown-o"></i>
-          <% end %>
-          &nbsp;&nbsp;
-          
-          <%= link_to cell_path(id: round.bluecornercell, action_id: point_deduction_id), method: :patch, :title => "-1 point to " + @blue_corner_name do %>
-            <i class="fa fa-minus-circle"></i>
-          <% end %>
-          &nbsp;&nbsp;
 
-          <%= link_to cell_path(id: round.bluecornercell, action_id: ko_id), method: :patch, :title => @blue_corner_name + " wins by knockout" do %>
-            <i class="fa fa-bolt"></i>  
-          <% end %>
-          &nbsp;&nbsp;
-          
-          <%= link_to cell_path(id: round.bluecornercell, action_id: tko_id), method: :patch, :title => @blue_corner_name + " wins by technical knockout" do %>
-            <i class="fa fa-asterisk"></i>
-          <% end %>
+        <td>
+          <%= render partial: 'cards/quick_score', locals: { :boxer_name => @blue_corner_name, :corner => "blue", :round => round, :wins_round_id => wins_round_id, :loses_round_id => loses_round_id, :point_deduction_id => point_deduction_id, :ko_id => ko_id, :tko_id => tko_id } %>
         </td>
       </tr>
     <% end %>
@@ -105,4 +79,3 @@
     </tr>
   </tbody>
 </table>
-

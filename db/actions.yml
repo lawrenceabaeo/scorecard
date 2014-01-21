@@ -4,25 +4,25 @@ action_objects:
   name: Wins Round
   description: Boxer wins the round. 
   points: 10
-  result_type: POINTS
+  result_type: POSITIVEPOINTS
 
 - action_code: LosesRound
   name: Loses Round
   description: Boxer loses the round.
   points: 9
-  result_type: POINTS
+  result_type: POSITIVEPOINTS
 
 - action_code: Tie
   name: Tie Round
   description: Both boxers win the round. 
   points: 10
-  result_type: TIE
+  result_type: POSITIVEPOINTS
 
 - action_code: PointDeduct
   name: Point Deduction (generic)
   description: Referee deducts a point from this boxer. 
   points: -1
-  result_type: POINTS
+  result_type: NEGATIVEPOINTS
 
 - action_code: LosesByDQ
   name: Loses By DQ (Disqualification)
