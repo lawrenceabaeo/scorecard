@@ -1,9 +1,29 @@
-<h1>Quick Scorecard Maker</h1>
-<%= form_tag({controller: "cards", action: "quick_create"}, method: "post") %>
-  <%= label_tag :total_rounds %>
-  <% distance = Array.new %>
-  <% 12.times.each do |num| %>
-    <% distance << ["#{num+1}", num+1] %>
-  <% end %>
-  <%= select_tag(:total_rounds, options_for_select(distance) ) %>
-  <%= submit_tag "Create" %>
+<div id="quick-cards-section">
+  <div id="quick-cards-section-statement">
+    <h1>Quick Scorecard Maker</h1>
+    <%= form_tag({controller: "cards", action: "quick_create"}, method: "post") %>
+      <%= label_tag :total_rounds %>
+      <% distance = Array.new %>
+      <% 12.times.each do |num| %>
+        <% distance << ["#{num+1}", num+1] %>
+      <% end %>
+      <%= select_tag(:total_rounds, options_for_select(distance) ) %>
+      <%= submit_tag "Create" %>
+    </div>
+  </div>
+</div>
+
+<div id="previous-cards-section">
+  <div id="previous-cards-section-statement">
+    <h4>Your Previous Cards:</h4>
+    <ul class="previous-cards-list">
+      <% @cards.each do |card| %>
+        <% @red = Fighter.find(card.match.redcorner_id) %>
+        <% @blue = Fighter.find(card.match.bluecorner_id) %>
+        <% d = card.created_at %>
+        <% display_date = d.strftime("%A %B %e, %l:%M %p") %>
+        <li><%= link_to @red.last_name + " vs " + @blue.last_name, card_path(card) %> <span class='date-emphasis'>created <%= display_date %></span></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

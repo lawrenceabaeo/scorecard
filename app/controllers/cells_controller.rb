@@ -14,12 +14,10 @@ class CellsController < ApplicationController
     end
     @boxer_full_name = @boxer.first_name + " " + @boxer.last_name
     @events_for_boxer_in_this_round = Event.where(:cell => @cell)
-    puts "GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA "
     @events_for_boxer_in_this_round.each do |event|
       action = Action.find(event.action.id)
       puts "An event for this action is: #{action.name}"
     end
-    puts "GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA "
   end
   
   def update
@@ -53,9 +51,6 @@ class CellsController < ApplicationController
       Event.destroy(@event)
       #TODO: Handle TKO and such
     end
-    # TODO: Nice to redirect back to the edit cell page
-    # redirect_to card_path(@card_id), :notice => "The action was successfully removed!"
-    # redirect_to card_path(@card.id), :notice => "TODO: Need to implemehtis deletion!"
     redirect_to edit_cell_path(@cell.id), :notice => "The action was successfully removed!"
   end
 
