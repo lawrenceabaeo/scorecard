@@ -1,24 +1,30 @@
-<h1>Cells#edit</h1>
-<p>Find me in app/views/cells/edit.html.erb</p>
+<h1>Edit</h1>
+<h3>Round <%= @round.round_number %> for <%= @boxer_full_name %></h3>
+TODO: show list of existing actions
+Edit existing actions for this boxer in Round X, or add a new action.
+</p>
+
 
 <table class='table table-bordered'>
   
   <tbody>
     <thead>
       <th>Name</th>
-      <th>Points</th>  
+      <th>Points</th>
+      <th>Apply</th>  
     </thead>
   </tbody>
 
   <% @actions.each do |action| %>
     <tr>
       <td>
-        <%= action.name %><br />
-        Action ID is: <%= action.id %><br />
-        <%= link_to "Apply this action to this fighter", cell_path(id: @cell_id, action_id: action.id), method: :patch %>
+        <%= action.name %>
       </td>
       <td>
         <%= action.points %>
+      </td>
+      <td>
+        <%= link_to "apply", cell_path(id: @cell_id, action_id: action.id), method: :patch %>
       </td>
     </tr>
   <% end %>

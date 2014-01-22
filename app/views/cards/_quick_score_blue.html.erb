@@ -9,11 +9,6 @@
 <% end %>
 &nbsp;&nbsp; 
 
-<%= link_to cell_path(id: corner_id, action_id: loses_round_id), method: :patch, :title => "+9, " + boxer_name + " loses this round", :class => 'tip' do %>
-<i class="fa fa-frown-o"></i>
-<% end %>
-&nbsp;&nbsp;
-
 <%= link_to cell_path(id: corner_id, action_id: point_deduction_id), method: :patch, :title => "-1 point to " + boxer_name, :class => 'tip' do %>
   <i class="fa fa-minus-circle"></i>
 <% end %>
@@ -29,6 +24,6 @@
 <% end %>
 &nbsp;&nbsp;
 
-<%= link_to edit_cell_path(round.redcornercell), :title => "More scoring options", :class => 'tip' do %>  
+<%= link_to edit_cell_path(corner_id), :title => "More scoring options", :class => 'tip' do %>  
   <i class="fa fa-cogs"></i>
 <% end %>

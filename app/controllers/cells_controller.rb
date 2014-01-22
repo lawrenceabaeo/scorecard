@@ -3,9 +3,20 @@ class CellsController < ApplicationController
   def edit
     @actions = Action.order(points: :desc)
     @cell_id = params[:id]
+    @cell = Cell.find(@cell_id)
+    @round = Round.find(@cell.round_id)
+    card = @round.card    
+    if (@cell.id == @round.redcornercell) 
+      @boxer = Fighter.find(card.match.redcorner)
+    else # it's blue
+      @boxer = Fighter.find(card.match.bluecorner)
+    end
+    @boxer_full_name = @boxer.first_name + " " + @boxer.last_name
   end
   
   def update
+    puts "GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA "
+    puts "GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA "
     @cell = Cell.find(params[:id])
     @round = Round.find(@cell.round_id)
     @card_id = @round.card_id

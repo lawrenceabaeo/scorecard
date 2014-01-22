@@ -24,3 +24,37 @@
 .quick-score-column {
   background-color: whitesmoke;
 }
+
+.quick-score-red-th {
+  text-align: right;
+}
+
+.quick-score-red-cell {
+  text-align: right;
+}
+
+.quick-score-blue-th {
+  text-align: left;
+}
+
+.quick-score-blue-cell {
+  text-align: left;
+}
+
+#card-table {
+  text-align: center;
+}
+
+table th {
+  text-align: center;
+}
+
+#card-table {
+  width:95%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.debug {
+  border: 1px solid red;
+}
