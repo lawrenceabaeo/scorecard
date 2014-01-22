@@ -27,7 +27,9 @@
           <%= action.points %>
         </td>
         <td>
-          <%= link_to "remove", cell_path(id: @cell_id, event_id: event.id), method: :delete %>
+          <%= link_to cell_path(id: @cell_id, event_id: event.id), :class => 'remove-link', method: :delete do %>
+          remove <i class="fa fa-times"></i>
+          <% end %>
         </td>
       </tr>
     <% end %>

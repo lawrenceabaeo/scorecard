@@ -93,6 +93,10 @@ table th {
   /*text-align: center;*/
 }
 
+.remove-link {
+  color: red;
+}
+
 .debug {
   border: 1px solid red;
 }
