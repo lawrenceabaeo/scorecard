@@ -1,17 +1,46 @@
-<h1>Edit</h1>
-<h3>Round <%= @round.round_number %> for <%= @boxer_full_name %></h3>
-TODO: show list of existing actions
-Edit existing actions for this boxer in Round X, or add a new action.
+<br /> 
+<p><%= link_to card_path(@card) do %>
+<i class="fa fa-arrow-circle-left"></i> back to card
+<% end %>  
 </p>
 
+<h1>Edit</h1>
+<h3>Round <%= @round.round_number %> for <%= @boxer_full_name %></h3>
 
+<% if @events_for_boxer_in_this_round.blank? == false %>
+  <h4>Your Currently Selected Actions:</h4>
+  <table class='table table-bordered'>
+    <tbody>
+      <thead>
+        <th>Name</th>
+        <th>Points</th>
+        <th>Remove</th>  
+      </thead>
+    </tbody>
+    <% @events_for_boxer_in_this_round.each do |event| %>
+      <% action = Action.find(event.action.id) %>
+      <tr>
+        <td>
+          <%= action.name %>
+        </td>
+        <td>
+          <%= action.points %>
+        </td>
+        <td>
+          <%= link_to "remove", cell_path(id: @cell_id, event_id: event.id), method: :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+<h4>All Options</h4>
 <table class='table table-bordered'>
-  
   <tbody>
     <thead>
       <th>Name</th>
       <th>Points</th>
-      <th>Apply</th>  
+      <th>Apply</th>
     </thead>
   </tbody>
 
@@ -29,3 +58,9 @@ Edit existing actions for this boxer in Round X, or add a new action.
     </tr>
   <% end %>
 </table>
+
+<br /> 
+<p><%= link_to card_path(@card) do %>
+<i class="fa fa-arrow-circle-left"></i> back to card
+<% end %>  
+</p>

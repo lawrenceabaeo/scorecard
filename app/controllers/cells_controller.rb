@@ -3,20 +3,26 @@ class CellsController < ApplicationController
   def edit
     @actions = Action.order(points: :desc)
     @cell_id = params[:id]
-    @cell = Cell.find(@cell_id)
+    @cell = Cell.find(params[:id])
     @round = Round.find(@cell.round_id)
-    card = @round.card    
-    if (@cell.id == @round.redcornercell) 
-      @boxer = Fighter.find(card.match.redcorner)
+    @card = @round.card
+    @card_id = @card.id
+    if (@cell.id == @round.redcornercell.id) 
+      @boxer = Fighter.find(@card.match.redcorner)
     else # it's blue
-      @boxer = Fighter.find(card.match.bluecorner)
+      @boxer = Fighter.find(@card.match.bluecorner)
     end
     @boxer_full_name = @boxer.first_name + " " + @boxer.last_name
+    @events_for_boxer_in_this_round = Event.where(:cell => @cell)
+    puts "GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA "
+    @events_for_boxer_in_this_round.each do |event|
+      action = Action.find(event.action.id)
+      puts "An event for this action is: #{action.name}"
+    end
+    puts "GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA "
   end
   
   def update
-    puts "GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA "
-    puts "GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA GABBA "
     @cell = Cell.find(params[:id])
     @round = Round.find(@cell.round_id)
     @card_id = @round.card_id
@@ -30,6 +36,29 @@ class CellsController < ApplicationController
     end
     redirect_to card_path(@card_id), :notice => "Your update was successful!"
   end
+
+  def destroy
+    @event = Event.find(params[:event_id])
+    @cell = @event.cell
+    @round = @cell.round
+    @card = @round.card
+    @action_id = @event.action_id
+    @action = Action.find(@action_id)
+    puts "OBO BOOB O BO BO BO BO BO BOBOB O OBO BOOB O BO BO BO BO BO BOBOB O OBO BOOB O BO BO BO BO BO BOBOB O OBO BOOB O BO BO BO BO BO BOBOB O "
+    puts "@action.name is #{@action.name}"
+    puts "OBO BOOB O BO BO BO BO BO BOBOB O OBO BOOB O BO BO BO BO BO BOBOB O OBO BOOB O BO BO BO BO BO BOBOB O OBO BOOB O BO BO BO BO BO BOBOB O "
+    if (@action.result_type == 'POSITIVEPOINTS')
+      delete_both_boxers_previous_postive_points(@round, @cell)
+    else 
+      Event.destroy(@event)
+      #TODO: Handle TKO and such
+    end
+    # TODO: Nice to redirect back to the edit cell page
+    # redirect_to card_path(@card_id), :notice => "The action was successfully removed!"
+    # redirect_to card_path(@card.id), :notice => "TODO: Need to implemehtis deletion!"
+    redirect_to edit_cell_path(@cell.id), :notice => "The action was successfully removed!"
+  end
+
 
   private # ========================================================================================
 
