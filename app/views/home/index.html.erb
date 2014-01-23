@@ -7,7 +7,7 @@
       <p>Can you <span class='myemphasis'>really</span> remember 12 rounds of boxing in your head?<br />Prove your winner using our boxing scorecards!</p>
       
       <% if (current_user) %>
-        <p><%= link_to cards_path, :class => 'btn btn-default', :method => 'get' do %>
+        <p><%= link_to cards_path, :class => 'btn btn-default' do %>
           Go to my cards!  <i class="fa fa-table"></i>
           <% end %>  
         </p>
