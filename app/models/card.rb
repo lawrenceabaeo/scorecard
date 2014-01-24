@@ -60,6 +60,79 @@ class Card < ActiveRecord::Base
     return false
   end
 
-  
+  def self.any_fight_stoppage_events?(card, blue_or_red_corner)
+    if Card.first_fight_stoppage_event(card, blue_or_red_corner) > 0
+      return true
+    else
+      return false
+    end
+  end
 
+
+  def self.rounds_with_stoppage_events(card, blue_or_red_corner)
+    these_rounds = Array.new
+    rounds = card.rounds.order("round_number ASC")
+    rounds.each do |round|
+      if blue_or_red_corner == "red"
+        cell = round.redcornercell
+      else 
+        cell = round.bluecornercell
+      end
+      if (Card.any_stoppage_events_for_cell?(cell))
+        these_rounds << round.round_number
+      end
+    end
+    return these_rounds
+  end
+
+  def self.any_stoppage_events_for_cell?(cell)
+      events_for_cell = cell.events
+      events_for_cell.each do |event|
+        if (event.action.points == 0) # 0 is the 'points' we use to indicate fight stoppage
+          # puts "Yes, there was a stoppage event for this cell"
+          return true
+        end
+      end
+      # puts "NO, there was NO stoppage event cell"
+      return false
+  end
+
+  def self.check_first_or_last_stoppage_event(card, blue_or_red_corner, first_or_last)
+    if order == "last"
+      this_order = "round_number DESC"
+    else
+      this_order = "round_number ASC"
+    end
+    
+    round_with_stoppage = 0
+    rounds = card.rounds.order(this_order)
+    rounds.each do |round|
+      if blue_or_red_corner == "red"
+        check_these_events = round.redcornercell.events
+      else 
+        check_these_events = round.bluecornercell.events
+      end
+
+      check_these_events.each do |event|
+        if (event.action.points == 0) # 0 is the 'points' we use to indicate fight stoppage
+          first_round_with_stoppage = round.round_number
+          return first_round_with_stoppage
+        end
+      end
+    end
+    return round_with_stoppage
+  end
+
+  def self.last_stoppage_event_in_cell(cell)
+    events = Event.where(:cell_id => cell).order("created_at ASC")
+    stoppage_events = Array.new
+    events.each do |event|
+      action = Action.find(event.action_id)
+      if action.points == 0
+        stoppage_events << event
+      end
+    end
+    return stoppage_events.last
+  end
+  
 end

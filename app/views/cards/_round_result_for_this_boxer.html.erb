@@ -1,0 +1,14 @@
+<% stoppage = Card.any_stoppage_events_for_cell?(cell)%>
+
+<% if (stoppage == true) %>
+  <% stoppage_in_cell = Card.last_stoppage_event_in_cell(cell) %>
+  <% action = Action.find(stoppage_in_cell.action) %>
+  <% if action.result_type != 'LOSS' %>
+  &nbsp;<%= link_to action.column_display, edit_cell_path(cell), :title => "Edit this result", :class => 'tip' %>&nbsp;
+  <% end %>
+<% end %>
+
+<% cell_points = Cell.cell_points_total(cell) %>
+<% if (cell_points != 0) %>
+  <%= link_to cell_points, edit_cell_path(cell), :title => "Edit this score", :class => 'tip' %>
+<% end %>

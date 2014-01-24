@@ -25,7 +25,8 @@
       </tr>
     </thead>
     <% @rounds.each do |round| %>
-      <% red_cell_points = Cell.cell_points_total(round.redcornercell) %>
+      <%# red_cell_points = Cell.cell_points_total(round.redcornercell) %>
+      <%# blue_cell_points = Cell.cell_points_total(round.bluecornercell) %>      
       <% blue_cell_points = Cell.cell_points_total(round.bluecornercell) %>
       <% wins_round_id = Action.find_by_name("Wins Round").id %>
       <% loses_round_id = Action.find_by_name("Loses Round").id %>
@@ -38,17 +39,13 @@
           <%= render partial: 'cards/quick_score_red', locals: { :boxer_name => @red_corner_name, :corner => "red", :round => round, :wins_round_id => wins_round_id, :loses_round_id => loses_round_id, :point_deduction_id => point_deduction_id, :ko_id => ko_id, :tko_id => tko_id } %>
         </td>
         <td>
-          <% if (red_cell_points != 0) %>
-            <%= link_to red_cell_points, edit_cell_path(round.redcornercell), :title => "Edit this score", :class => 'tip' %>
-          <% end %>
+          <%= render partial: 'cards/round_result_for_this_boxer', locals: {:cell => round.redcornercell} %>
         </td>
         
         <td><%= round.round_number %></td>
         
         <td>
-          <% if (blue_cell_points != 0) %>
-            <%= link_to blue_cell_points, edit_cell_path(round.bluecornercell), :title => "Edit this score", :class => 'tip' %>
-          <% end %>
+          <%= render partial: 'cards/round_result_for_this_boxer', locals: {:cell => round.bluecornercell} %>
         </td>
 
         <td class="quick-score-blue-cell">

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140118214529) do
+ActiveRecord::Schema.define(version: 20140124000913) do
 
   create_table "actions", force: true do |t|
     t.string   "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140118214529) do
     t.string   "action_code"
     t.string   "result_type"
     t.integer  "custom_display_order"
+    t.string   "column_display"
   end
 
   create_table "cards", force: true do |t|
