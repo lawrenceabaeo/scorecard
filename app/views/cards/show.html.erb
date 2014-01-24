@@ -18,9 +18,13 @@
     <thead>
       <tr>
         <th class="quick-score-red-th">Quick Score</th>
-        <th><%= @red_corner_name %></th>
+        <th>
+          <%= link_to @red_corner_name, edit_fighter_path(:id => @red_corner, :card => @card), :title => "Edit Boxer Name", :class => 'tip' %>
+        </th>
         <th>Rnd #</th>
-        <th><%= @blue_corner_name%></th>   
+        <th>
+          <%= link_to @blue_corner_name, edit_fighter_path(:id => @blue_corner, :card => @card), :title => "Edit Boxer Name", :class => 'tip' %>
+        </th>   
         <th class="quick-score-blue-th">Quick Score</th>
       </tr>
     </thead>

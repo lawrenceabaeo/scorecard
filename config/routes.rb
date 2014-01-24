@@ -1,4 +1,9 @@
 Scorecard::Application.routes.draw do
+  resources :fighters, only: [:edit, :update] do 
+    member do 
+      post :edit_fighter
+    end
+  end
   resources :matches
   resources :cards do 
     collection do

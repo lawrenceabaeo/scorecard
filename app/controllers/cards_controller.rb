@@ -11,6 +11,8 @@ class CardsController < ApplicationController
     @rounds = Round.where(:card => @card).order(round_number: :asc )
     @red_corner_name = @card.match.redcorner.first_name + " " + @card.match.redcorner.last_name
     @blue_corner_name = @card.match.bluecorner.first_name + " " + @card.match.bluecorner.last_name
+    @red_corner = @card.match.redcorner.id
+    @blue_corner = @card.match.bluecorner.id
   end
 
   def new
