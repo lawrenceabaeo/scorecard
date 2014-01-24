@@ -102,6 +102,22 @@ table th {
   text-align: left;
 }
 
+#edit-fighter-section {
+  padding-top: 30px;
+  padding-bottom: 30px;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+#edit-fighter-section-content {
+  padding: 24px;
+  border-radius: 6px;
+  background-color: whitesmoke;
+  border: 1px solid #e3e3e3;
+  /*text-align: center;*/
+}
+
+
 .debug {
   border: 1px solid red;
 }

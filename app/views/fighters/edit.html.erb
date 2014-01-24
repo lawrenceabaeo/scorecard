@@ -1,3 +1,11 @@
+<% if @card_id != "" && @card_id != nil %>
+  <br /> 
+  <p><%= link_to card_path(@card_id) do %>
+  <i class="fa fa-arrow-circle-left"></i> back to card
+  <% end %>  
+  </p>
+<% end %>
+
 <div id="edit-fighter-section">
   <div id="edit-fighter-section-content">
     <h4>Edit this boxer</h4>

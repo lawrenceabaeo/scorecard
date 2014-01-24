@@ -10,6 +10,18 @@ class FightersController < ApplicationController
   def edit_fighter
     card_id = params[:card]
     fighter = Fighter.find(params[:id])
+
+    if (card_id == "" || card_id.nil?)
+      if current_user != fighter.user
+        redirect_to cards_path, :alert => "You cannot update this boxer because it is owned by someone else!"
+        return
+      else 
+        fighter.update_attributes(:first_name => params[:first_name], :last_name => params[:last_name])
+        redirect_to cards_path, :notice => "Your boxer was updated!"
+        return  
+      end
+    end
+
     puts "fighter.id is: #{fighter.id}"
     card = Card.find(card_id)
     if card.match.redcorner_id == fighter.id
@@ -17,9 +29,7 @@ class FightersController < ApplicationController
     else
       corner = "blue"
     end
-    puts "corner is: #{corner}"
-    puts "current_user.id is: #{current_user.id}"
-    puts "fighter.user_id is: #{fighter.user_id}"
+
     if current_user != fighter.user
       puts "This user doesn't own the current fighter, so make a new one"
       new_fighter = Fighter.create(:user_id => current_user.id, :first_name => params[:first_name], :last_name => params[:last_name])
