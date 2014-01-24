@@ -1,7 +1,7 @@
 action_objects: 
 
 - action_code: WinsRound
-  name: Wins Round
+  name: WINS Round
   description: Boxer wins the round. 
   points: 10
   result_type: POSITIVEPOINTS
@@ -36,11 +36,11 @@ action_objects:
   column_display:
 
 - action_code: WinsByDQ
-  name: Wins by DQ
+  name: WINS by DQ
   description: The other boxer was disqualified, resulting in a win for this boxer. 
   points: 0 
   result_type: WIN
-  column_display:
+  column_display: DQwin
 
 - action_code: NC
   name: NC (No Contest)
@@ -50,7 +50,7 @@ action_objects:
   column_display: NC
 
 - action_code: WinsByKO
-  name: Wins by KO (Knocks Out other opponent)
+  name: WINS by KO
   description: This boxer knocked out the other boxer. 
   points: 0
   result_type: WIN
@@ -64,14 +64,14 @@ action_objects:
   column_display:
 
 - action_code: WinsByTKO
-  name: Wins by TKO (generic Technical Knock Out)
+  name: WINS by TKO
   description: This boxer wins due to a technical knockout.
   points: 0
   result_type: WIN
   column_display: TKO
 
 - action_code: LosesByTKO
-  name: Loses by TKO (generic Technical Knock Out)
+  name: Loses by TKO
   description: This boxer loses due to a technical knockout.
   points: 0
   result_type: LOSS

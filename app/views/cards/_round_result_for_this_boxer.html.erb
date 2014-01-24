@@ -3,7 +3,7 @@
 <% if (stoppage == true) %>
   <% stoppage_in_cell = Card.last_stoppage_event_in_cell(cell) %>
   <% action = Action.find(stoppage_in_cell.action) %>
-  <% if action.result_type != 'LOSS' %>
+  <% if action.result_type == 'WIN' || action.result_type == 'NC'%>
   &nbsp;<%= link_to action.column_display, edit_cell_path(cell), :title => "Edit this result", :class => 'tip' %>&nbsp;
   <% end %>
 <% end %>

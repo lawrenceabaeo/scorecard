@@ -97,6 +97,11 @@ table th {
   color: red;
 }
 
+.final-result-indicator {
+  margin-top: 0px;
+  text-align: left;
+}
+
 .debug {
   border: 1px solid red;
 }

@@ -60,15 +60,6 @@ class Card < ActiveRecord::Base
     return false
   end
 
-  def self.any_fight_stoppage_events?(card, blue_or_red_corner)
-    if Card.first_fight_stoppage_event(card, blue_or_red_corner) > 0
-      return true
-    else
-      return false
-    end
-  end
-
-
   def self.rounds_with_stoppage_events(card, blue_or_red_corner)
     these_rounds = Array.new
     rounds = card.rounds.order("round_number ASC")
@@ -135,4 +126,54 @@ class Card < ActiveRecord::Base
     return stoppage_events.last
   end
   
+  def self.display_card_result_statement(card, round_number_where_stoppage_occurred)
+    result_statement = ""
+
+    round_object = Round.where(:card_id => card.id, :round_number => round_number_where_stoppage_occurred).first
+    red_stoppage_event = Card.last_stoppage_event_in_cell(round_object.redcornercell)
+    red_stoppage_action = Action.find(red_stoppage_event.action_id)
+    if red_stoppage_action.result_type == "WIN"
+      redboxer = Fighter.find(card.match.redcorner)
+      redboxer_full_name = redboxer.first_name + " " + redboxer.last_name
+      result_statement = "#{redboxer_full_name} #{red_stoppage_action.name} in Round #{round_number_where_stoppage_occurred}"
+    elsif red_stoppage_action.result_type == "NC"
+      result_statement = "NO CONTEST declared in Round #{round_number_where_stoppage_occurred}"
+    else # it means that blue won so...
+      boxer = Fighter.find(card.match.bluecorner)
+      boxer_full_name = boxer.first_name + " " + boxer.last_name
+      blue_stoppage_event = Card.last_stoppage_event_in_cell(round_object.bluecornercell)
+      blue_stoppage_action = Action.find(blue_stoppage_event.action_id)
+      result_statement = "#{boxer_full_name} #{blue_stoppage_action.name} in Round #{round_number_where_stoppage_occurred}"   
+    end
+    return result_statement
+  end
+
+  def self.all_rounds_scored_from_both_fighters?(card)
+    missing_red = Card.some_rounds_are_missing_positive_points?(card, "red")
+    missing_blue = Card.some_rounds_are_missing_positive_points?(card, "blue")
+    if ( (missing_red == false) && (missing_blue == false) )
+      return true
+    else
+      return false
+    end
+  end
+
+  def self.display_card_result_statement_due_to_scoring(card)
+    result_statement = ""
+    red_final_score = Card.final_score(card, "red")
+    blue_final_score = Card.final_score(card, "blue")
+    if red_final_score > blue_final_score
+      boxer = Fighter.find(card.match.redcorner)
+      boxer_full_name = boxer.first_name + " " + boxer.last_name
+      result_statement = "#{boxer_full_name} WINS on your scorecard, #{red_final_score} to #{blue_final_score}"
+    elsif blue_final_score > red_final_score 
+      boxer = Fighter.find(card.match.bluecorner)
+      boxer_full_name = boxer.first_name + " " + boxer.last_name
+      result_statement = "#{boxer_full_name} WINS on your scorecard, #{blue_final_score} to #{red_final_score}"
+    elsif red_final_score == blue_final_score
+      result_statement = "The match ends in a TIE."
+    end
+    return result_statement
+  end
+
 end
