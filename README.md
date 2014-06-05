@@ -2,6 +2,9 @@
 
 A scorecard application tailored for boxing matches. 
 
+###UPDATE June 2014 
+* Future development will be private. This code remains to let potential employers/clients/peers review it.
+
 # Where? 
 
 [http://lawrenceabaeo-scorecard.herokuapp.com/](http://lawrenceabaeo-scorecard.herokuapp.com/)
